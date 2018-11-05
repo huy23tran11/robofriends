@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import CardList from '../components/CardList.js';
 import SearchBox from '../components/SearchBox.js';
 import Scroll from '../components/Scroll.js';
+import ErrorHandling from '../components/ErrorHandling.js'
+import Clock from '../components/Clock'
 import './App.css';
 
 
@@ -32,12 +34,16 @@ class App extends Component{
 		return(
 		(!this.state.robots.length) ?
 			 <h1 className ='tc'> LOADING.... </h1> :
-	
-			<div className ='tc'>
-				<h1 className = 'f1'><b>Robo-friends</b></h1>
+			<div className = 'tc'>
+				<div className ='block'>
+					<Clock/>
+				</div>
+				<h1 className = 'f1 block'><b>Robo-friends</b></h1>
 				<SearchBox searchChange = {this.onSearchChange}/>
 				<Scroll>
-					<CardList robots ={filterRobot} />
+					<ErrorHandling>
+						<CardList robots ={filterRobot} />
+					</ErrorHandling>
 				</Scroll>
 			</div>
 			)
